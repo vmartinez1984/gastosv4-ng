@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre" maxlength="50"/>
+    </div>
+    <div>
+        <label>Categoria</label>
+        <select formControlName="categoria">
+            <option>Seleccione</option>
+            @for (item of categorias; track item.id) {
+                <option value="{{item.nombre}}">{{item.nombre}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Cantidad</label>
+        <input type="number" formControlName="cantidad" min="1"/>
+    </div>
+    <div>
+        <label>¿Es primario?</label>
+        <input type="checkbox" formControlName="esPrimario"/>
+    </div>
+    <div>
+        <button type="submit">Guardar</button>
+    </div>
+</form>

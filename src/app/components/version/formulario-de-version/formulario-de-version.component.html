@@ -1,0 +1,39 @@
+<form>
+    <div>
+        <label>Nombre</label>
+        <input type="text">
+    </div>
+    <div>
+        <label>Fecha inicial</label>
+        <input type="date">
+    </div>
+    <div>
+        <label>Fecha Final</label>
+        <input type="date">
+    </div>
+    <div>
+        <table>
+            @for (detalle of detalles; track $index) {
+            <tr>
+                <td>
+                    <input type="text">
+                </td>
+                <td>
+                    <input type="number">
+                </td>
+                <td>
+                    <select>
+                        <option>Seleccione</option>
+                        @for(item of ahorros; track item.id){
+                        <option value="{{item.id}}">{{item.total}} {{item.nombre}}</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <button type="button" (click)="agregarElemento()">+</button>
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</form>

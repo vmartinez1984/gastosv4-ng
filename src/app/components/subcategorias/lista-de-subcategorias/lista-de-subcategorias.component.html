@@ -1,0 +1,25 @@
+
+<a href="subcategorias/agregar">Agregar</a>
+{{total}}
+
+@if(estaCargando){
+
+}
+<table>
+    <thead>
+        
+    </thead>
+    <tbody>
+        @for(item of lista; track item.id){
+            <tr >
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>{{ item.categoria }}</td>
+                <td>{{ item.esPrimario }}</td>
+                <td>
+                    <a href="/subcategorias/editar/{{item.id}}">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
