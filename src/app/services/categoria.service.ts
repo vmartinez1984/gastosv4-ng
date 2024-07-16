@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CategoriaDto } from '../interfaces/categoria-dto';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
-  private url = 'https://localhost:7049/api/Categorias'
+  private url = environment.baseUrl + 'Categorias'
 
   constructor(private httpClient: HttpClient){
   }

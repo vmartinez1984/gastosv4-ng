@@ -1,39 +1,69 @@
-<form>
+<form [formGroup]="formGroup" (ngSubmit)="guardarVersion()">
     <div>
         <label>Nombre</label>
-        <input type="text">
+        <input type="text" formControlName="nombre">
     </div>
     <div>
         <label>Fecha inicial</label>
-        <input type="date">
+        <input type="date" formControlName="fechaInicial">
     </div>
     <div>
         <label>Fecha Final</label>
-        <input type="date">
+        <input type="date" formControlName="fechaFinal">
     </div>
     <div>
-        <table>
-            @for (detalle of detalles; track $index) {
-            <tr>
-                <td>
-                    <input type="text">
-                </td>
-                <td>
-                    <input type="number">
-                </td>
-                <td>
-                    <select>
-                        <option>Seleccione</option>
-                        @for(item of ahorros; track item.id){
-                        <option value="{{item.id}}">{{item.total}} {{item.nombre}}</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <button type="button" (click)="agregarElemento()">+</button>
-                </td>
-            </tr>
-            }
-        </table>
+        <button type="submit">Guardar</button>
     </div>
 </form>
+
+<form [formGroup]="formGroupDetalleDeVersion" (ngSubmit)="agregarDetalleDeVersion()">
+    <div>
+        <select formControlName="nombre">
+            <option value="">Seleccione subcategoria</option>
+            @for (item of subcategorias; track $index) {
+            <option value="{{item.nombre}}">{{item.cantidad | currency}} {{item.nombre}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select formControlName="ahorroId">
+            <option value="">Seleccione ahorro</option>
+            @for(item of ahorros; track item.id){
+            <option value="{{item.id}}">{{item.total | currency}} {{item.nombre}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <input type="number" formControlName="cantidad" min="10" max="3000">
+    </div>
+    <div>
+        <button type="submit">Agregar</button>
+    </div>
+</form>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Subcategoria</th>
+                <th>Ahorro</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        @for (detalle of detalles; track $index) {
+        <tr>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        }
+    </table>
+</div>

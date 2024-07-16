@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SubcategoriaDto, SubcategoriaDtoIn } from '../interfaces/subcategoria-dto';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class SubcategoriaService {
     return this.httpClient.post<any>(this.url, subcategoria)
   }
 
-  private url: string = "https://localhost:7049/api/Subcategorias/"
+  private url: string = environment.baseUrl + "Subcategorias/"
 
   constructor(private httpClient: HttpClient) { }
 

@@ -1,1 +1,36 @@
-<p>formulario works!</p>
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Nombre</label>
+        <input type="text" maxlength="25" formControlName="nombre"/>
+    </div>
+
+    <div>
+        <label>Interes</label>
+        <input type="number" min="0" max="20" formControlName="interes"/>
+    </div>
+
+    <div>
+        <label>Fecha inicial</label>
+        <input type="date" formControlName="fechaInicial"/>
+    </div>
+
+    <div>
+        <label>Fecha final</label>
+        <input type="date" formControlName="fechaFinal"/>
+    </div>
+
+    <div>
+        <label>Tipo de ahorro</label>
+        <select formControlName="tipoDeAhorro">
+            <option value="">Seleccione</option>
+            @for(item of tipoDeAhorros; track item.id){
+                <option value="{{item.nombre}}">{{item.nombre}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <button type="submit">
+            Guardar
+        </button>
+    </div>
+</form>

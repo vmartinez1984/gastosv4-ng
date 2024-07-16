@@ -1,7 +1,13 @@
+@if(estaCargando){
+<div>
+    Esta cargando ...
+</div>
+}
+<a href="/ahorros/agregar">Agregar</a>
 <table>
     @for (item of ahorros; track item.id) {
-        <tr>
-            <td>{{item.nombre}}</td>
-        </tr>
+    <tr>
+        <td>{{item.nombre}}</td>
+    </tr>
     }
 </table>

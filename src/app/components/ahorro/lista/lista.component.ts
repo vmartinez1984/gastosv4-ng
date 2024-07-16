@@ -10,16 +10,23 @@ import { AhorroDto } from '../../../interfaces/ahorro-dto';
   styleUrl: './lista.component.css'
 })
 export class ListaDeAhorrosComponent {
-  ahorros: AhorroDto[]=[]
+  ahorros: AhorroDto[] = []
+  estaCargando = false
 
-  constructor(private servicio: ServicioService){
+  constructor(private servicio: ServicioService) {
     this.obtener()
   }
   obtener() {
+    this.estaCargando = true
     this.servicio.ahorro.obtener().subscribe({
-      next:(data)=>{
-        console.log(data)
+      next: (data) => {
+        //console.log(data)
         this.ahorros = data
+        this.estaCargando = false
+      },
+      error:(data)=>{
+        console.log(data)
+        this.estaCargando = false
       }
     })
   }
