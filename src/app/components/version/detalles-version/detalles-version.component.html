@@ -1,22 +1,4 @@
-<form [formGroup]="formGroup" (ngSubmit)="guardarVersion()">
-    <div>
-        <label>Nombre</label>
-        <input type="text" formControlName="nombre">
-    </div>
-    <div>
-        <label>Fecha inicial</label>
-        <input type="date" formControlName="fechaInicial">
-    </div>
-    <div>
-        <label>Fecha Final</label>
-        <input type="date" formControlName="fechaFinal">
-    </div>
-    <div>
-        <button type="submit">Guardar</button>
-    </div>
-</form>
-
-<form [formGroup]="formGroupDetalleDeVersion" (ngSubmit)="agregarDetalleDeVersion()">
+<form [formGroup]="formGroup" (ngSubmit)="agregar()">
     <div>
         <select formControlName="nombre">
             <option value="">Seleccione subcategoria</option>
@@ -54,7 +36,7 @@
                 <th></th>
             </tr>
         </thead>
-        @for (detalle of detalles; track $index) {
+        @for (detalle of version?.detalles; track $index) {
         <tr>
             <td>
                 {{detalle.nombre}}

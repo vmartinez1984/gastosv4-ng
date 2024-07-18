@@ -1,4 +1,10 @@
 export interface VersionDto {
+    id: string
+    guid:string
+    nombre: string
+    detalles:DetalleDto[]
+    fechaFinal: Date
+    fechaInicial: Date
 }
 
 export interface VersionDtoIn {

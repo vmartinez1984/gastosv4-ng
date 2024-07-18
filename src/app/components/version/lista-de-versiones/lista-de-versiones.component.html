@@ -1,1 +1,26 @@
-<p>lista-de-versiones works!</p>
+<!-- <a href="/versiones/agregar">Agregar</a> -->
+ <app-formulario-de-version2 (versionEmitter)="guardar($event)" [version]="version"/>
+
+<table style="width: 90%;">
+    <thead>
+        <tr>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of versiones; track $index) {
+        <tr>
+            <td>{{item.nombre}}</td>
+            <td>{{item.fechaInicial | date}}</td>
+            <td>{{item.fechaFinal | date}}</td>
+            <td>
+                <!-- <a [routerLink]="['/','versiones','editar', item.id]">Editar</a> -->
+                <button (click)="editar(item)">Editar</button>
+            </td>
+            <td>
+                <a [routerLink]="['/','versiones','detalles', item.id]">Detalles</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

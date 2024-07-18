@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" (ngSubmit)="guardarVersion()">
+    <div>
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre">
+    </div>
+    <div>
+        <label>Fecha inicial</label>
+        <input type="date" formControlName="fechaInicial">
+    </div>
+    <div>
+        <label>Fecha Final</label>
+        <input type="date" formControlName="fechaFinal">
+    </div>
+    <div>
+        <button type="submit">Guardar</button>
+    </div>
+</form>

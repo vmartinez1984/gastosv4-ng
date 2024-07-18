@@ -6,6 +6,7 @@ import { SubcategoriaDto } from '../../../interfaces/subcategoria-dto';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
+import { Guid } from '../../../../../helpers/Guid';
 
 @Component({
   selector: 'app-formulario-de-version',
@@ -15,18 +16,35 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './formulario-de-version.component.css'
 })
 export class FormularioDeVersionComponent {
+  editar(detalle: DetalleDtoIn) {
+    this.formGroupDetalleDeVersion.patchValue({
+      nombre: detalle.nombre,
+      cantidad: detalle.cantidad,
+      ahorroId: detalle.ahorroId,
+      guid: detalle.guid
+    })
+  }
+
   agregarDetalleDeVersion() {
     var detalle: DetalleDtoIn = {
       ahorroId: this.formGroupDetalleDeVersion.value.ahorroId,
       cantidad: this.formGroupDetalleDeVersion.value.cantidad,
       nombre: this.formGroupDetalleDeVersion.value.nombre,
-      guid: ''
+      guid: Guid.newGuid()
     }
     console.log(detalle)
+    this.servicio.version.agregarDetalle(this.versionId, detalle).subscribe({
+      next:(data)=>{
+        console.log(data)
+        this.detalles.push(detalle)
+      }, error: (data)=>{
+        console.log(data)
+      }
+    })
   }
 
   ahorros: AhorroDto[] = []
-  detalles: DetalleDto[] = []
+  
   subcategorias: SubcategoriaDto[] = []
 
   constructor(private servicio: ServicioService, private formBuilder: FormBuilder) {
@@ -41,7 +59,8 @@ export class FormularioDeVersionComponent {
     this.formGroupDetalleDeVersion = this.formBuilder.group({
       nombre: '',
       cantidad: 0,
-      ahorroId: ''
+      ahorroId: '',
+      guid:''
     })
   }
 
@@ -79,8 +98,22 @@ export class FormularioDeVersionComponent {
     this.versionEmitter.emit(version)
   }
 
+  ngOnChanges(){
+    if(this.version){
+      console.log(this.version)
+      this.formGroup.patchValue({
+        nombre: this.version.nombre,
+        fechaInicial: this.version.fechaInicial,
+        fechaFinal: this.version.fechaFinal
+      })      
+    }
+    console.log(this.detalles)
+  }
+
   @Output() versionEmitter: EventEmitter<VersionDtoIn> = new EventEmitter<VersionDtoIn>();
   @Input() versionId: string = '0'
+  @Input() version!: VersionDtoIn
+  @Input() detalles: DetalleDto[] = []
   formGroup: FormGroup
   formGroupDetalleDeVersion: FormGroup
 }
