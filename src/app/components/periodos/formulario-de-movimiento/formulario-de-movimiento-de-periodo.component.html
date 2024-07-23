@@ -1,0 +1,22 @@
+<p>{{nombreDelAhorro}}</p>
+<p>{{cantidad}}</p>
+
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Cantida</label>
+        <input type="number" formControlName="cantidad">
+        <!-- @if((formGroup.get('cantidad').invalid && (formGroup.get('cantidad').dirty) || formGroup.get('cantidad').touched)){
+            @if(formGroup.get('cantidad').errors.required){
+                <div>La cantidad es obligatoria</div>        
+            }
+        }     -->
+    </div>
+    <div>
+        <label>Nota</label>
+        <input type="text" formControlName="nota">
+    </div>
+    <div>
+        <button type="submit">Guardar</button>
+        <button type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+</form>

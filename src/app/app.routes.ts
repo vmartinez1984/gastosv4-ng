@@ -8,15 +8,27 @@ import { AgregarAhorroComponent } from './components/ahorro/agregar/agregar.comp
 import { ListaDeVersionesComponent } from './components/version/lista-de-versiones/lista-de-versiones.component';
 import { EditarVersionComponent } from './components/version/editar-version/editar-version.component';
 import { DetallesVersionComponent } from './components/version/detalles-version/detalles-version.component';
+import { ListaDePeriodosComponent } from './components/periodos/lista-de-periodos/lista-de-periodos.component';
+import { AgregarPeriodoComponent } from './components/periodos/agregar-periodo/agregar-periodo.component';
+import { DepositarComponent } from './components/ahorro/depositar/depositar.component';
+import { RetirarComponent } from './components/ahorro/retirar/retirar.component';
+import { DetalleDePeriodoComponent } from './components/periodos/detalle-de-periodo/detalle-de-periodo.component';
+import { DetalleDeAhorroComponent } from './components/ahorro/detalle-de-ahorro/detalle-de-ahorro.component';
 
 export const routes: Routes = [
+    { path: 'ahorros', component: ListaDeAhorrosComponent },
+    { path: 'ahorros/agregar', component: AgregarAhorroComponent },
+    { path: 'ahorros/:id/deposito', component: DepositarComponent },
+    { path: 'ahorros/:id/retiro', component: RetirarComponent },
+    { path: 'ahorros/:id/detalles', component: DetalleDeAhorroComponent },
     { path: 'subcategorias', component: ListaDeSubcategoriasComponent },
     { path: 'subcategorias/agregar', component: AgregarSubcategoriaComponent },
     { path: 'subcategorias/editar/:id', component: EditarSubcategoriaComponent },
-    { path: 'ahorros', component: ListaDeAhorrosComponent },
-    { path: 'ahorros/agregar', component: AgregarAhorroComponent },
     { path: 'versiones', component: ListaDeVersionesComponent },
     { path: 'versiones/agregar', component: AgregarVersionComponent },
     { path: 'versiones/editar/:id', component: EditarVersionComponent },
     { path: 'versiones/detalles/:id', component: DetallesVersionComponent },
+    { path: 'periodos', component: ListaDePeriodosComponent },
+    { path: 'periodos/:id/detalles', component: DetalleDePeriodoComponent },
+    { path: 'periodos/agregar', component: AgregarPeriodoComponent }
 ];

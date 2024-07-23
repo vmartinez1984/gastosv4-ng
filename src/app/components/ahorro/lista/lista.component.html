@@ -1,13 +1,54 @@
-@if(estaCargando){
-<div>
-    Esta cargando ...
-</div>
-}
-<a href="/ahorros/agregar">Agregar</a>
-<table>
-    @for (item of ahorros; track item.id) {
-    <tr>
-        <td>{{item.nombre}}</td>
-    </tr>
+<div class="container">
+
+    <a href="/ahorros/agregar">Agregar</a>
+    @if(estaCargando){
+    <div class="d-flex justify-content-center text-primary">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     }
-</table>
+    @else {
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @for (item of ahorros; track item.id) {
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.total | currency}}</td>
+                <td>
+                    <a [routerLink]="['/','ahorros',item.id,'deposito']">Depositar</a>
+                </td>
+                <td>
+                    <a [routerLink]="['/','ahorros',item.id,'retiro']">Retirar</a>
+                </td>
+                <td>
+                    <a [routerLink]="['/','ahorros',item.id,'detalles']">Detalles</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>

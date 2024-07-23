@@ -1,0 +1,30 @@
+<table>
+    @for (item of detalles; track $index) {
+    <tr>
+        <td>{{item.detalle.nombre}}</td>
+        <td>{{item.detalle.cantidad}}</td>
+        <td>
+            <ul>
+                @for (movimiento of item.movimientos; track $index) {
+                    <li>                        
+                        <span>{{movimiento.cantidad | currency}}</span>
+                        <span> - {{movimiento.nota}}</span>
+                    </li>
+                }
+            </ul>
+        </td>
+        <td>
+            <button (click)="verFormulario(true); enviarData(item);">Agregar</button>
+
+        </td>
+    </tr>
+    }
+</table>
+@if(mostrarFormulario){
+<div class="overlay">
+    <div class="modal">
+        <app-formulario-de-movimiento-de-periodo (eventEmitterMovimiento)="agregarMovimiento($event)"
+            (eventEmiterCancelar)="ocultarFormulario()" [cantidad]="cantidad" [nombreDelAhorro]="nombre" />
+    </div>
+</div>
+}

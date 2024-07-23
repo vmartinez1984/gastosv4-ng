@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { ServicioService } from '../../../services/servicio.service';
 import { AhorroDto } from '../../../interfaces/ahorro-dto';
+import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-lista',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.css'
 })

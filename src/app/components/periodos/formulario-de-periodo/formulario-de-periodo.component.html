@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Version</label>
+        <select formControlName="versionId">
+            <option value="">Seleccione versión</option>
+            @for (item of versiones; track $index) {
+                <option value="{{item.id}}">{{item.nombre}}</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre">
+    </div>
+    <div>
+        <label>Fecha inicial</label>
+        <input type="date" formControlName="fechaInicial">
+    </div>
+    <div>
+        <label>Fecha Final</label>
+        <input type="date" formControlName="fechaFinal">
+    </div>
+    <div>
+        <button type="submit">Guardar</button>
+    </div>
+</form>

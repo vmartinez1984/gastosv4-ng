@@ -1,1 +1,4 @@
-<app-formulario (eventEmitter)="guardar($event)"/>
+<div class="container">
+    <app-formulario (eventEmitter)="guardar($event)" [estaCargando]="estaCargando"/>
+    <a [routerLink]="['/','ahorros']">Regresar</a>
+</div>

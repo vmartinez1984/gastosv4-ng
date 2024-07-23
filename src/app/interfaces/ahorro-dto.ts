@@ -16,4 +16,8 @@ export interface AhorroDtoIn {
     otros: {}
 }
 
-
+export interface MovimientoDtoIn{
+    cantidad: number
+    concepto:string
+    referencia: string
+}

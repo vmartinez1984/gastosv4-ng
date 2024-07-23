@@ -1,0 +1,12 @@
+<a [routerLink]="['/','periodos','agregar']">Agregar</a>
+
+<table style="width: 90%;">
+    @for (item of periodos; track $index) {
+    <tr>
+        <td>{{item.nombre}}</td>
+        <td>
+            <a [routerLink]="['/','periodos', item.id, 'detalles']">Detalles</a>           
+        </td>
+    </tr>
+    }
+</table>
