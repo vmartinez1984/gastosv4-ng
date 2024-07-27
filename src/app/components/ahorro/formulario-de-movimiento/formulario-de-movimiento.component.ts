@@ -65,7 +65,7 @@ export class FormularioDeMovimientoComponent {
 
   formGroup: any
   @Output() eventEmiterMovimiento: EventEmitter<MovimientoDtoIn> = new EventEmitter<MovimientoDtoIn>()
-  estaCargando = false
+  @Input() estaCargando = false
   submitted: boolean = false
   get f() { return this.formGroup.controls }
   @ViewChild('cantidad') inputCantidad! :ElementRef  

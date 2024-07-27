@@ -6,6 +6,15 @@ export interface AhorroDto {
     clienteId: string
     interes: number
     fechaDeRegistro: Date
+    depositos: MovimientoDto[]
+    retiros: MovimientoDto[]
+}
+
+export interface MovimientoDto{
+    cantidad: number
+    concepto:string
+    referencia: string
+    fechaDeRegistro: Date
 }
 
 export interface AhorroDtoIn {
