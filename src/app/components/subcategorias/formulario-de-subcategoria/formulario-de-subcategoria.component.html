@@ -1,26 +1,66 @@
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
-    <div>
-        <label>Nombre</label>
-        <input type="text" formControlName="nombre" maxlength="50"/>
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" formControlName="nombre" maxlength="50" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors}" #nombre />
+        @if(submitted && f['nombre'].errors?.['required']){
+        <div class="invalid-feedback">
+            @if(f['nombre'].errors?.['required']){
+            <div>Ingresa un nombre</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>Categoria</label>
-        <select formControlName="categoria">
-            <option>Seleccione</option>
+    <div class="mb-3">
+        <label class="form-label">Categoria</label>
+        <select formControlName="categoria" class="form-select"
+            [ngClass]="{ 'is-invalid': submitted && f['categoria'].errors}">
+            <option value="">Seleccione</option>
             @for (item of categorias; track item.id) {
-                <option value="{{item.nombre}}">{{item.nombre}}</option>
+            <option value="{{item.nombre}}">{{item.nombre}}</option>
             }
         </select>
+        @if(submitted && f['categoria'].errors?.['required']){
+        <div class="invalid-feedback">
+            @if(f['categoria'].errors?.['required']){
+            <div>Seleccione una categoria</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>Cantidad</label>
-        <input type="number" formControlName="cantidad" min="1"/>
+    <div class="mb-3">
+        <label class="form-label">Cantidad</label>
+        <input type="number" formControlName="cantidad" min="1" class="form-control" #cantidad min="1" max="3500"
+            [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}" #nombre />
+        @if(submitted && f['cantidad'].errors){
+        <div class="invalid-feedback">
+            @if(formGroup.controls['cantidad'].errors?.min){
+            <div>Ingresa un cantidad valida</div>
+            }
+            @if(formGroup.controls['cantidad'].errors?.required){
+            <div>Ingresa un cantidad</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>¿Es primario?</label>
-        <input type="checkbox" formControlName="esPrimario"/>
+
+    <div class="mb-3">
+        <label class="form-label">¿Es primario?</label>
+        <input type="checkbox" formControlName="esPrimario" class="form-check" />
     </div>
-    <div>
-        <button type="submit">Guardar</button>
+    <div class="mb-3">
+        @if(estaCargando){
+        <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+            Un momento
+            <div class="spinner-border spinner-border-sm text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </button>
+        }
+        @else {
+        <button type="submit" class="btn btn-primary">
+            Guardar
+        </button>
+        }
     </div>
 </form>
