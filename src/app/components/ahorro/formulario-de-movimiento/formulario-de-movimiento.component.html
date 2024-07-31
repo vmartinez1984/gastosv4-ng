@@ -5,7 +5,7 @@
             <div class="mb-3">
                 <label class="form-label">Cantidad</label>
                 <input type="number" min="1" max="34000" formControlName="cantidad" class="form-control" #cantidad
-                    [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}" />
+                    [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}" (change)="calcularTotal()" />
                 @if(submitted && f['cantidad'].errors){
                 <div class="invalid-feedback">
                     @if(formGroup.controls['cantidad'].errors?.min){
@@ -16,6 +16,7 @@
                     }
                 </div>
                 }
+                {{total2 | currency}}
             </div>
 
             <div class="mb-3">

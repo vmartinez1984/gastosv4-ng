@@ -1,26 +1,73 @@
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
     <div>
-        <label>Version</label>
-        <select formControlName="versionId">
+        <label class="form-label">Version</label>
+        <select formControlName="versionId" class="form-select"
+            [ngClass]="{ 'is-invalid': submitted && f['versionId'].errors}">
             <option value="">Seleccione versión</option>
             @for (item of versiones; track $index) {
-                <option value="{{item.id}}">{{item.nombre}}</option>
+            <option value="{{item.id}}">{{item.nombre}}</option>
             }
         </select>
+        @if(submitted && f['versionId'].errors){
+        <div class="invalid-feedback">
+            @if(f['versionId'].errors?.['required']){
+            <div>Seleccione una categoria</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>Nombre</label>
-        <input type="text" formControlName="nombre">
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" #nombre
+            [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors}" />
+        @if(submitted && f['nombre'].errors?.['required']){
+        <div class="invalid-feedback">
+            @if(f['nombre'].errors?.['required']){
+            <div>Ingresa un nombre</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>Fecha inicial</label>
-        <input type="date" formControlName="fechaInicial">
+
+    <div class="mb-3">
+        <label class="form-label">Fecha inicial</label>
+        <input type="date" formControlName="fechaInicial" class="form-control" #fechaInicial
+        [ngClass]="{ 'is-invalid': submitted && f['fechaInicial'].errors}" />
+        @if(submitted && f['fechaInicial'].errors){
+        <div class="invalid-feedback">
+            @if(f['fechaInicial'].errors?.['required']){
+            <div>Ingresa una fecha</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>Fecha Final</label>
-        <input type="date" formControlName="fechaFinal">
+
+    <div class="mb-3">
+        <label class="form-label">Fecha Final</label>
+        <input type="date" formControlName="fechaFinal" class="form-control" #fechaFinal
+        [ngClass]="{ 'is-invalid': submitted && f['fechaFinal'].errors}" />
+        @if(submitted && f['fechaFinal'].errors){
+        <div class="invalid-feedback">
+            @if(f['fechaFinal'].errors?.['required']){
+            <div>Ingresa una fecha</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <button type="submit">Guardar</button>
+    <div class="mb-3">
+        @if(estaCargando){
+        <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+            Un momento
+            <div class="spinner-border spinner-border-sm text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </button>
+        }
+        @else {
+        <button type="submit" class="btn btn-primary">
+            Guardar
+        </button>
+        }
     </div>
 </form>

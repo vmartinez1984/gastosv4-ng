@@ -1,23 +1,23 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VersionDtoIn } from '../../../interfaces/version-dto';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-de-version2',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './formulario-de-version2.component.html',
   styleUrl: './formulario-de-version2.component.css'
 })
-export class FormularioDeVersion2Component {
-  formGroup: any;
+export class FormularioDeVersion2Component {  
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
-      nombre: '',
-      fechaInicial: '',
-      fechaFinal: ''
+      nombre: ['',[Validators.required]],
+      fechaInicial: ['',[Validators.required]],
+      fechaFinal: ['',[Validators.required]],
     })
   }
 
@@ -31,6 +31,10 @@ export class FormularioDeVersion2Component {
     this.versionEmitter.emit(version)
   }
 
+  submitted: boolean = false
+  estaCargando: boolean = false
+  get f() { return this.formGroup.controls }
+  formGroup: any
   @Output() versionEmitter: EventEmitter<VersionDtoIn> = new EventEmitter<VersionDtoIn>();
   @Input() version!: VersionDtoIn
 

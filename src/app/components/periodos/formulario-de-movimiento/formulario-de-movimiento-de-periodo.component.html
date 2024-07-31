@@ -1,22 +1,36 @@
-<p>{{nombreDelAhorro}}</p>
-<p>{{cantidad}}</p>
-
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
-    <div>
-        <label>Cantida</label>
-        <input type="number" formControlName="cantidad">
-        <!-- @if((formGroup.get('cantidad').invalid && (formGroup.get('cantidad').dirty) || formGroup.get('cantidad').touched)){
-            @if(formGroup.get('cantidad').errors.required){
-                <div>La cantidad es obligatoria</div>        
+    <div class="mb-3">
+        <label class="form-label">Cantidad</label>
+        <input type="number" formControlName="cantidad" #cantidad min="1" max="3500" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && formGroup.controls['cantidad'].errors}" />
+        @if(submitted && formGroup.controls['cantidad'].errors){
+        <div class="invalid-feedback">
+            @if(formGroup.controls['cantidad'].errors?.['required']){
+            <div>Ingresa una cantidad</div>
             }
-        }     -->
+            @if(formGroup.controls['cantidad'].errors?.['min']){
+            <div>Ingresa una cantidad mayor a cero</div>
+            }
+        </div>
+        }
     </div>
-    <div>
-        <label>Nota</label>
-        <input type="text" formControlName="nota">
+    <div class="mb-3">
+        <label class="form-label">Nota</label>
+        <input type="text" formControlName="nota" class="form-control">
     </div>
-    <div>
-        <button type="submit">Guardar</button>
-        <button type="button" (click)="cancelar()">Cancelar</button>
+    <div class="mb-3">
+        @if(estaCargando){
+        <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+            Un momento
+            <div class="spinner-border spinner-border-sm text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </button>
+        }
+        @else {
+        <button type="submit" class="btn btn-primary">
+            Guardar
+        </button>
+        }
     </div>
 </form>

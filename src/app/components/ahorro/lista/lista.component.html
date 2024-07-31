@@ -15,6 +15,7 @@
             <tr>
                 <th></th>
                 <th>Nombre</th>
+                <th>Tipo</th>
                 <th>Total</th>
                 <th></th>
                 <th></th>
@@ -25,6 +26,7 @@
             <tr>
                 <th></th>
                 <th>Nombre</th>
+                <th>Tipo</th>
                 <th>Total</th>
                 <th></th>
                 <th></th>
@@ -36,6 +38,7 @@
             <tr>
                 <td>{{item.id}}</td>
                 <td>{{item.nombre}}</td>
+                <td>{{item.otros.tipoDeCuenta}}</td>
                 <td>{{item.total | currency}}</td>
                 <td>
                     <a [routerLink]="['/','ahorros',item.id,'deposito']">Depositar</a>

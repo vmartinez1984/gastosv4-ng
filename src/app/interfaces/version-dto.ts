@@ -19,9 +19,12 @@ export interface DetalleDtoIn {
     nombre: string
     ahorroId: string
     guid: string
+    ahorroTipoDeCuenta?:string
 }
 
 export interface DetalleDto {
+    ahorroTotal?: number
+    ahorroTipoDeCuenta?: string
     cantidad: number
     nombre: string
     ahorroId: string

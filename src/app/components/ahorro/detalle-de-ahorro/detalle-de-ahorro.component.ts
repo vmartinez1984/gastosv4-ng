@@ -36,7 +36,7 @@ export class DetalleDeAhorroComponent {
   obtenerAhorro(ahorroId: string) {    
     this.servicio.ahorro.obtenerPorId(ahorroId).subscribe({
       next: (data) => {
-        console.log(data)
+        //console.log(data)        
         this.ahorro = data
       },
       error: (data) => {
@@ -67,6 +67,7 @@ export class DetalleDeAhorroComponent {
           })
           this.botonDeCerrar.nativeElement.click()
           this.estaCargando = false
+          this.ahorro.total = this.ahorro.total - movimiento.cantidad
       },
       error: (data) => {
         console.log(data)
@@ -90,6 +91,7 @@ export class DetalleDeAhorroComponent {
           })
           this.botonDeCerrar.nativeElement.click()
           this.estaCargando = false
+          this.ahorro.total = this.ahorro.total + movimiento.cantidad
       },
       error: (data) => {
         console.log(data)

@@ -8,6 +8,14 @@ export interface AhorroDto {
     fechaDeRegistro: Date
     depositos: MovimientoDto[]
     retiros: MovimientoDto[]
+    otros: OtroDto
+}
+
+interface OtroDto {
+    fechaInicial: string;
+    fechaFinal: string;
+    nota: string;
+    tipoDeCuenta: string;
 }
 
 export interface MovimientoDto{

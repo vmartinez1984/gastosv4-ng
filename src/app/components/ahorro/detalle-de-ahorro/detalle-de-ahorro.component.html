@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        @if (estaCargando) {
+        @if(estaCargando){
         <div class="d-flex justify-content-center text-primary">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -11,6 +11,7 @@
         {
         <h2>{{ahorro?.nombre}}</h2>
         <h2>{{ahorro?.total | currency}}</h2>
+        <h3>{{ahorro?.otros?.tipoDeCuenta}}</h3>
         <div class="col-6">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -38,7 +39,7 @@
             </button>
             <table class="table">
                 <tbody>
-                    @for (item of ahorro?.retiros; track $index) {
+                    @for (item of ahorro?.retiros!; track $index) {
                     <tr>
                         <td>{{item.cantidad | currency}}</td>
                         <td>{{item.concepto}}</td>
@@ -63,7 +64,7 @@
                     #botonDeCerrar></button>
             </div>
             <div class="modal-body">
-                <app-formulario-de-movimiento (eventEmiterMovimiento)="mover($event)" />
+                <app-formulario-de-movimiento (eventEmiterMovimiento)="mover($event)" [total]="ahorro.total" />
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

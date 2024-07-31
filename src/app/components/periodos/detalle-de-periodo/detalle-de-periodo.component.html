@@ -1,30 +1,74 @@
-<table>
-    @for (item of detalles; track $index) {
-    <tr>
-        <td>{{item.detalle.nombre}}</td>
-        <td>{{item.detalle.cantidad}}</td>
-        <td>
-            <ul>
-                @for (movimiento of item.movimientos; track $index) {
-                    <li>                        
-                        <span>{{movimiento.cantidad | currency}}</span>
-                        <span> - {{movimiento.nota}}</span>
-                    </li>
-                }
-            </ul>
-        </td>
-        <td>
-            <button (click)="verFormulario(true); enviarData(item);">Agregar</button>
-
-        </td>
-    </tr>
+<div class="container">
+    @if(estaCargando){
+    <div class="d-flex justify-content-center text-primary">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     }
-</table>
-@if(mostrarFormulario){
-<div class="overlay">
-    <div class="modal">
-        <app-formulario-de-movimiento-de-periodo (eventEmitterMovimiento)="agregarMovimiento($event)"
-            (eventEmiterCancelar)="ocultarFormulario()" [cantidad]="cantidad" [nombreDelAhorro]="nombre" />
+    <h2 class="text-primary">{{periodo?.nombre}}</h2>
+    <hr/>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{{ahorro?.total | currency}}</th>
+                <th>Tipo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>{{total | currency}}</th>
+                <th>Tipo</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @for (item of detalles; track $index) {
+            <tr>
+                <td>{{item.detalle.nombre}}</td>                
+                <td>{{item.detalle.cantidad | currency}}</td>
+                <td>{{item.detalle.ahorroTipoDeCuenta}} {{item.detalle.ahorroTotal | currency}}</td>
+                <td>
+                    <ul>
+                        @for (movimiento of item.movimientos; track $index) {
+                        <li>
+                            <span>{{movimiento.cantidad | currency}}</span>
+                            <span> - {{movimiento.nota}}</span>
+                        </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        (click)="mostrarFormulario(item)">
+                        Agregar
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{titulo}} {{cantidad | currency}}</h1>
+                <br />                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #botonDeCerrar></button>
+            </div>
+            <div class="modal-body">
+                <app-formulario-de-movimiento-de-periodo (eventEmitterMovimiento)="agregarMovimiento($event)"
+                    [nombreDelAhorro]="nombre" [estaCargando]="estaCargando" [limpiarFormulario]="limpiarFormulario"/>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
 </div>
-}

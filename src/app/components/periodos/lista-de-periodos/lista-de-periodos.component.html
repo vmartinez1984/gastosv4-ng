@@ -1,12 +1,45 @@
-<a [routerLink]="['/','periodos','agregar']">Agregar</a>
+<div class="container">
 
-<table style="width: 90%;">
-    @for (item of periodos; track $index) {
-    <tr>
-        <td>{{item.nombre}}</td>
-        <td>
-            <a [routerLink]="['/','periodos', item.id, 'detalles']">Detalles</a>           
-        </td>
-    </tr>
-    }
-</table>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        (click)="mostrarFormulario('Agregar')">
+        Agregar
+    </button>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (item of periodos; track $index) {
+            <tr>
+                <td>{{item.nombre}}</td>
+                <td>
+                    <a [routerLink]="['/','periodos', item.id, 'detalles']">Detalles</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{titulo}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    #botonDeCerrar></button>
+            </div>
+            <div class="modal-body">
+                <app-formulario-de-periodo (eventEmitter)="agregar($event)"/>
+            </div>
+            <div class="modal-footer">                
+            </div>
+        </div>
+    </div>
+</div>

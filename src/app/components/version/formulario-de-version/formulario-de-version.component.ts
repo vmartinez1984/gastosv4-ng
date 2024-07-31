@@ -85,7 +85,7 @@ export class FormularioDeVersionComponent {
   }
 
   agregarElemento() {
-    this.detalles.push({ ahorroId: '', cantidad: 0, nombre: '', guid:'' })
+    this.detalles.push({ ahorroId: '', cantidad: 0, nombre: '', guid:'', ahorroTipoDeCuenta:'' })
   }
 
   guardarVersion() {

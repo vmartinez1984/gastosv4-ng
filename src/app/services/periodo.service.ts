@@ -24,5 +24,5 @@ export class PeriodoService {
     return this.httpClient.post(this.url, periodo)
   }
 
-  private url = environment.baseUrl + "periodos/"
+  private url = environment.baseUrl + "Periodos/"
 }

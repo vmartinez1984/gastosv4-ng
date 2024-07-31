@@ -3,15 +3,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovimientoDtoIn } from '../../../interfaces/ahorro-dto';
 import { NgClass } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-de-movimiento',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, CurrencyPipe],
   templateUrl: './formulario-de-movimiento.component.html',
   styleUrl: './formulario-de-movimiento.component.css'
 })
 export class FormularioDeMovimientoComponent {
+  total2: number = 0;
+  calcularTotal() {
+    this.total2 = this.total + this.formGroup.value.cantidad
+  }
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
@@ -21,15 +26,16 @@ export class FormularioDeMovimientoComponent {
     })
   }
 
-  ngOnInit(){
+  ngOnInit() {
     setTimeout(() => {
       this.inputCantidad.nativeElement.focus()
-    }, 500)    
+    }, 500)
   }
 
   ngOnChanges() {
     this.habilitarFormulario(this.estaCargando)
     console.log(this.estaCargando)
+    this.total2 = this.total
   }
 
   habilitarFormulario(estaCargando: boolean) {
@@ -66,8 +72,9 @@ export class FormularioDeMovimientoComponent {
   formGroup: any
   @Output() eventEmiterMovimiento: EventEmitter<MovimientoDtoIn> = new EventEmitter<MovimientoDtoIn>()
   @Input() estaCargando = false
+  @Input() total: number = 0
   submitted: boolean = false
   get f() { return this.formGroup.controls }
-  @ViewChild('cantidad') inputCantidad! :ElementRef  
-  @ViewChild('concepto') inputConcepto! :ElementRef  
+  @ViewChild('cantidad') inputCantidad!: ElementRef
+  @ViewChild('concepto') inputConcepto!: ElementRef
 }
